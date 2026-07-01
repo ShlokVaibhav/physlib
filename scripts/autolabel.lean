@@ -222,7 +222,7 @@ def _root_.System.FilePath.isPrefixOf (dir path : FilePath) : Bool :=
 Return all labels in `physlibLabels` which match
 at least one of the `files`.
 
-* `files`: array of relative paths starting from the mathlib root directory.
+* `files`: array of relative paths starting from the physlib root directory.
 -/
 
 def getMatchingLabels (files : Array FilePath) : Array Label :=
