@@ -10,6 +10,8 @@ public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 public import Mathlib.Analysis.ODE.ExistUnique
 /-!
 
+/- making a spurios comment-/
+
 # Solutions to the damped harmonic oscillator
 
 ## i. Overview
