@@ -59,6 +59,36 @@ open Lean System
 
 namespace AutoLabel
 
+/-! 1. An inductive class `Label` is defined to contain all permissible labels
+    2. A function `Label.toString` is defined to convert a `Label` to its string
+    3. A structure `LabelData` is defined to contain the directories, exclusions, and dependencies for each label
+       (exclusions and dependencies are currently empty)
+    4. A function `physlibLabelData` is defined to map each LabelData structure
+       to its corresponding `LabelData` fields (i.e. directories, exclusions, and dependencies)
+    5. Physlibunlabelled and quantuminfoUnlabelled are defined to contain the paths which are not
+    covered by any label (empty for now)
+    6. A function `getMatchingLabels` is defined to return all labels in `physlibLabels` which match
+       folder for at least one of the modified files.
+    7. A function `dropDependentLabels` is defined to reduce a list of labels to not include any
+       which are dependencies of other labels in the list.
+
+    Then a section Test is defined to :
+
+    1. Few guards are defined to test the functionality of the declarations defined above
+    2. A function `findUncoveredPaths` is defined to ensure the labels defined in `physlibLabels`
+       cover all subfolders of `Physlib/` and `QuantumInfo/`.
+
+    Then the github routine is defined:
+
+    1. A function `githubAnnotation` is defined to create a message which GitHub CI parses as
+    annotation and displays at the specified file.
+
+    2. IO AutoLabel command is opened to define the main function which takes in a list of
+    arguments and returns an IO UInt32. This is the function run during github action.
+
+     -/
+
+
 /-- Maximal number of labels which can be added. If more are applicable, nothing will be added. -/
 def MAX_LABELS := 1
 
@@ -136,6 +166,7 @@ def Label.toString : Label → String
   | .«t-resource-theory-qi»            => "t-resource-theory-qi"
   | .«t-states-qi»                     => "t-states-qi"
   | .«CI»                              => "CI"
+
 instance : ToString Label where
   toString := Label.toString
 
